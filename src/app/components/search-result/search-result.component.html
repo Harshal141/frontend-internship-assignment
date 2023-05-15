@@ -1,0 +1,35 @@
+<div *ngIf="isLoading; else content">
+  <div class="flex items-center justify-center h-screen">
+    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+  </div>  
+</div>
+
+<ng-template #content>
+  <div class="tw-m-24-px">
+    <div class="tw-mb-24-px tw-text-24-px"> Top {{ books.length }} book{{ books.length > 1 ? "s" : "" }} on {{ subjectName }}</div>
+  
+    <ng-container>
+      <table class="table-view">
+        <thead>
+          <tr class="table-row">
+            <th class="header">Title and Sub Title</th>
+            <th class="header">Author</th>
+            <th class="header">First Publish Year</th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          <tr *ngFor="let book of books" class="row-data">
+            <td>
+              <a class="tw-no-underline" href="https://openlibrary.org{{ book.key }}" target="_blank">{{ book.title }}</a>
+            </td>
+            <td>
+              {{ book.author_name[0] }}
+            </td>
+            <td>{{ book.first_publish_year }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+  </div>
+</ng-template>
+  

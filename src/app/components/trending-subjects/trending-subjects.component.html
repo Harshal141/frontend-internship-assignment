@@ -1,6 +1,15 @@
-<div *ngIf="allBooks.length > 0">
-  <front-end-internship-assignment-table-view
-  [booksList]="allBooks"
-  [subjectName]="subjectName"
-  ></front-end-internship-assignment-table-view>
-</div>
+<ng-container *ngIf="isLoading; else content">
+  <div class="flex items-center justify-center h-screen">
+    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+  </div>
+</ng-container>
+
+<ng-template #content>
+  <div *ngIf="allBooks.length > 0">
+    <front-end-internship-assignment-table-view
+    [booksList]="allBooks"
+    [subjectName]="subjectName"
+    ></front-end-internship-assignment-table-view>
+  </div>
+</ng-template>
+

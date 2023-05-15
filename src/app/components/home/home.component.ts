@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+// import { FormControl } from '@angular/forms';
 import { debounceTime, filter } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'front-end-internship-assignment-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  bookSearch: FormControl;
-
-  constructor() {
-    this.bookSearch = new FormControl('');
-  }
+export class HomeComponent {
+  constructor(private router: Router) { }
 
   trendingSubjects: Array<any> = [
     { name: 'JavaScript' },
@@ -22,12 +19,17 @@ export class HomeComponent implements OnInit {
     { name: 'Crypto' },
   ];
 
-  ngOnInit(): void {
-    this.bookSearch.valueChanges
-      .pipe(
-        debounceTime(300),
-      ).
-      subscribe((value: string) => {
-      });
+  formData = {
+    name: '',
+    // Add more properties for other form controls
+  };
+
+  onSubmit() {
+    // Handle the form submission logic
+    console.log(this.formData.name); // Example: Log the form data to the console
+    // redirect to the search results page
+    this.router.navigate(['/search-result/' + this.formData.name]);
   }
+
+
 }

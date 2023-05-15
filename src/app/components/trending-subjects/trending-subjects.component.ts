@@ -10,9 +10,9 @@ import { Book } from 'src/app/core/models/book-response.model';
 })
 export class TrendingSubjectsComponent implements OnInit {
 
-  isLoading: boolean = true;
+  isLoading = false;
 
-  subjectName: string = '';
+  subjectName = '';
 
   allBooks: Book[] = [];
 
