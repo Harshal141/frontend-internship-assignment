@@ -11,7 +11,7 @@ export class SearchService {
   constructor(private apiService: ApiService) {}
 
   getSearchBooks(subjectName: string): Observable<BookResponse> {
-    const limit = 10;
-    return this.apiService.get(`/search.json?q=${encodeURIComponent(subjectName)}&limit=${limit}`);
+    // const limit = 10;
+    return this.apiService.get(`/search.json?q=${encodeURIComponent(subjectName)}`);
   }
 }

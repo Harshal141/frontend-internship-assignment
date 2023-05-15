@@ -16,8 +16,32 @@ export class searchResultComponent implements OnInit {
   isLoading = false;
   subjectName = '';
   
-  books: any = [];
+  allResults: any[] = [];
+  resultsPerPage = 10;
+  currentPage = 1;
 
+  getTotalPages(): number {
+    return Math.ceil(this.allResults.length / this.resultsPerPage);
+  }
+
+  getPaginatedResults(): any[] {
+    const startIndex = (this.currentPage - 1) * this.resultsPerPage;
+    const endIndex = startIndex + this.resultsPerPage;
+    return this.allResults.slice(startIndex, endIndex);
+  }
+
+  goToPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  goToNextPage(): void {
+    const maxPage = Math.ceil(this.allResults.length / this.resultsPerPage);
+    if (this.currentPage < maxPage) {
+      this.currentPage++;
+    }
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -39,7 +63,7 @@ export class searchResultComponent implements OnInit {
       this.isLoading = true;
       // this.getAllBooks();
     });
-    const apiUrl = `http://openlibrary.org/search.json?q=${encodeURIComponent(this.subjectName)}&limit=10`;
+    // const apiUrl = `http://openlibrary.org/search.json?q=${encodeURIComponent(this.subjectName)}&limit=10`;
     
 
     // this.http.get(apiUrl).subscribe((response: any) => {
@@ -50,7 +74,7 @@ export class searchResultComponent implements OnInit {
     // });
 
     this.SearchService.getSearchBooks(this.subjectName).subscribe((response: any) => {
-      this.books = response.docs;
+      this.allResults = response.docs;
       // this.subjectsArray = data;
       // console.log(this.books[0])
       this.isLoading = false;
