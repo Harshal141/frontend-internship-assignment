@@ -20,7 +20,7 @@ import { searchResultComponent } from './components/search-result/search-result.
     HttpClientModule,
     SharedModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

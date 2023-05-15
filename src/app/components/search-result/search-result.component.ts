@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { SubjectsService } from '../../core/services/subjects.service';
-import { Book } from 'src/app/core/models/book-response.model';
+// import { Book } from 'src/app/core/models/book-response.model';
 import { HttpClient } from '@angular/common/http';
+import { SearchService } from '../../core/services/search.service';
 
 @Component({
   selector: 'front-end-internship-assignment-search-result',
@@ -20,7 +21,7 @@ export class searchResultComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private subjectsService: SubjectsService,
+    private SearchService: SearchService,
     private http: HttpClient
   ) {}
 
@@ -40,7 +41,15 @@ export class searchResultComponent implements OnInit {
     });
     const apiUrl = `http://openlibrary.org/search.json?q=${encodeURIComponent(this.subjectName)}&limit=10`;
     
-    this.http.get(apiUrl).subscribe((response: any) => {
+
+    // this.http.get(apiUrl).subscribe((response: any) => {
+    //   this.books = response.docs;
+    //   // this.subjectsArray = data;
+    //   // console.log(this.books[0])
+    //   this.isLoading = false;
+    // });
+
+    this.SearchService.getSearchBooks(this.subjectName).subscribe((response: any) => {
       this.books = response.docs;
       // this.subjectsArray = data;
       // console.log(this.books[0])
