@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { SubjectsService } from '../../core/services/subjects.service';
 // import { Book } from 'src/app/core/models/book-response.model';
 import { HttpClient } from '@angular/common/http';
 import { SearchService } from '../../core/services/search.service';
+import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'front-end-internship-assignment-search-result',
@@ -56,13 +57,32 @@ export class searchResultComponent implements OnInit {
   //     this.isLoading = false;
   //   });
   // }
-
-  ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.subjectName = params.get('name') || '';
-      this.isLoading = true;
-      // this.getAllBooks();
+  getData(): Observable<any> {
+    this.SearchService.getSearchBooks(this.subjectName).subscribe((response: any) => {
+      this.allResults = response.docs;
+      // this.subjectsArray = data;
+      // console.log(this.books[0])
+      this.isLoading = false;
     });
+    return new Observable<any>();// Your data fetching logic here
+  }
+  ngOnInit(): void {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        // React to changes in the parameter value
+        this.subjectName = params.get('name') || '';
+        this.isLoading = true;
+        // Perform any necessary logic based on the parameter value
+        // Load data, make API calls, etc.
+        return this.getData(); // Observable or Promise for data fetching if needed
+      })
+    ).subscribe();
+
+    // this.route.paramMap.subscribe((params: ParamMap) => {
+    //   this.subjectName = params.get('name') || '';
+    //   this.isLoading = true;
+    //   // this.getAllBooks();
+    // });
     // const apiUrl = `http://openlibrary.org/search.json?q=${encodeURIComponent(this.subjectName)}&limit=10`;
     
 

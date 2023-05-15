@@ -2,20 +2,12 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'front-end-internship-assignment-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'front-end-internship-assignment-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
 })
-export class HomeComponent {
+export class NavbarComponent {
   constructor(private router: Router) { }
-
-  trendingSubjects: Array<any> = [
-    { name: 'JavaScript' },
-    { name: 'CSS' },
-    { name: 'HTML' },
-    { name: 'Harry Potter' },
-    { name: 'Crypto' },
-  ];
 
   formData = {
     name: '',

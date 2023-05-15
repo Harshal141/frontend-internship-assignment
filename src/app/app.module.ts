@@ -9,10 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { searchResultComponent } from './components/search-result/search-result.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
-  declarations: [AppComponent, TrendingSubjectsComponent, HomeComponent, searchResultComponent],
+  declarations: [AppComponent, TrendingSubjectsComponent, HomeComponent, searchResultComponent, NavbarComponent],
   imports: [
     BrowserModule,
     RouterModule,
