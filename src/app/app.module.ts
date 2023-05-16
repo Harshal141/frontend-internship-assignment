@@ -10,6 +10,8 @@ import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { searchResultComponent } from './components/search-result/search-result.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CachingInterceptor } from './core/services/caching-interceptor.service';
 
 
 @NgModule({
@@ -23,7 +25,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
