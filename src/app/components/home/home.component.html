@@ -24,15 +24,36 @@
 
 <front-end-internship-assignment-navbar/>
 
-  <div class="p-4 sm:ml-64 mt-8">
-    <h2 class="text-2xl font-bold mb-4">Trending Subjects</h2>
+  <div class="p-4 sm:ml-64 mt-20 ">
+    <!-- <h2 class="text-2xl font-bold mb-4">Trending Subjects</h2>
     <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       <li class="bg-white shadow-md rounded p-4"  *ngFor="let subject of trendingSubjects"  >
         <h3 class="text-lg font-bold">{{ subject.name }}</h3>
         <p routerLink="/trending-subject/{{ subject.name }}" style="color:blue;cursor: pointer;">Search</p>
       </li>
-    </ul>
-  </div>
+    </ul> -->
+    <div class="text-center bg-gray-50 text-gray-800 py-24 px-6">
+      <h1 class="text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight mb-15">Surf Through 3M+ Books <br ><span class="text-4xl md:text-5xl xl:text-6xl font-bold tracking-tight mb-1 text-blue-600">Search Now</span></h1>
+    </div> 
+      <form class="flex items-center text-center w-10/12 mx-auto" (ngSubmit)="onSubmit()">   
+        <div class="relative w-full">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+          </div>
+          <input type="text" [(ngModel)]="formData.name" id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Now" required>
+      </div>
+      <button type="submit" class="inline-block mx-3 px-7 py-3 mr-2 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <span class="sr-only">Search</span>
+      </button>
 
-<!-- <front-end-internship-assignment-navbar/> -->
+      <!-- <form class="flex" (ngSubmit)="onSubmit()">
+          <input placeholder="Search Books" type="text" id="name" name="name" [(ngModel)]="formData.name" class="px-2 py-1 rounded-l-md focus:outline-none">
+          <button type="submit" class="bg-white text-blue-500 px-4 py-1 rounded-r-md hover:bg-gray-100">Go</button>
+        </form> -->
+    </form>
+  </div>
+  
+  
+  <!-- <front-end-internship-assignment-navbar/> -->
 
