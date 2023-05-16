@@ -14,6 +14,14 @@ export class NavbarComponent {
     // Add more properties for other form controls
   };
 
+  trendingSubjects: Array<any> = [
+    { name: 'JavaScript' },
+    { name: 'CSS' },
+    { name: 'HTML' },
+    { name: 'Harry Potter' },
+    { name: 'Crypto' },
+  ];
+
   onSubmit() {
     // Handle the form submission logic
     console.log(this.formData.name); // Example: Log the form data to the console
