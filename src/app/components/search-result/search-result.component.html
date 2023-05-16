@@ -6,8 +6,8 @@
 
 <ng-template #content>
   <front-end-internship-assignment-navbar/>
-  <div class="tw-m-24-px" *ngIf="allResults.length > 0; else nodata" >
-    <div class="tw-mb-24-px tw-text-24-px"> Top book{{ allResults.length > 1 ? "s" : "" }} on {{ subjectName }}</div>
+  <div class="p-4 sm:ml-64 mt-20" *ngIf="allResults.length > 0; else nodata" >
+    <div class="tw-mb-24-px tw-text-24-px"> Book{{ allResults.length > 1 ? "s" : "" }} based on search "{{ subjectName }}"</div>
   
     <ng-container>
       <table class="table-view">
@@ -43,7 +43,7 @@
     </ng-container>
   </div>
   <ng-template #nodata>
-    <div class="flex items-center justify-center h-full" style="margin-top: -80px;">
+    <div class="flex items-center justify-center h-full p-4 sm:ml-64" style="margin-top: -80px;">
       <div class="text-center">
         <h2 class="text-2xl font-bold mb-4">No Data Found</h2>
         <p class="text-gray-500">Sorry, no data was found. Visit <a style="color: blue;" routerLink="/">Home</a> </p>
