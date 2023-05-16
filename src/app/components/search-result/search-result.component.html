@@ -24,9 +24,9 @@
               <a class="tw-no-underline" href="https://openlibrary.org{{ book.key }}" target="_blank">{{ book.title }}</a>
             </td>
             <td>
-              {{ book.author_name }}
+              {{ book.author_name ? book.author_name.join(", ") : "N/A" }}
             </td>
-            <td>{{ book.first_publish_year }}</td>
+            <td>{{ book.first_publish_year ? book.first_publish_year : "N/A" }}</td>
           </tr>
         </tbody>
       </table>
