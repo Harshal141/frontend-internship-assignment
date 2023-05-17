@@ -43,6 +43,15 @@ export class searchResultComponent implements OnInit {
       this.currentPage++;
     }
   }
+  getPageNumbers(): number[] {
+    const totalPages = this.getTotalPages();
+    return Array(totalPages).fill(0).map((_, index) => index + 1);
+  }
+  
+  goToPage(page: number) {
+    this.currentPage = page;
+  }
+  
 
   constructor(
     private route: ActivatedRoute,

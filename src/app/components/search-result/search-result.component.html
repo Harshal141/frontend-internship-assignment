@@ -30,17 +30,42 @@
           </tr>
         </tbody>
       </table>
-      <p class="mt-3">Page: {{ currentPage }} / {{getTotalPages()}} </p>
+      
       <br>
-      <button class="px-4 py-2 bg-blue-500 text-white rounded-md mr-2 mb-4"
-      (click)="goToPreviousPage()" 
-      [disabled]="currentPage === 1">Previous</button>
+      <button class="px-4 py-2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 mr-2 mb-4"
+      [ngClass]="{ 'opacity-50 cursor-not-allowed': currentPage === 1, 'bg-gray-500': currentPage === 1 }"
+      (click)="goToPreviousPage()">
+        Previous
+      </button>
+      
+      <button class="px-4 py-2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+      [ngClass]="{ 'opacity-50 cursor-not-allowed': currentPage === getTotalPages(), 'bg-gray-500': currentPage === getTotalPages() }"
+        (click)="goToNextPage()">
+        Next
+      </button>
+      <!-- <button class="px-4 py-2 bg-blue-500 text-white rounded-md mr-2 mb-4"
+        (click)="goToPreviousPage()" 
+        [disabled]="currentPage === 1">Previous</button>
+        
+        <button class="px-4 py-2 bg-blue-500 text-white rounded-md" 
+        (click)="goToNextPage()" 
+        [disabled]="currentPage === getTotalPages()">Next</button> -->
+        
+        <!-- <p class="mt-3">Page: {{ currentPage }} / {{getTotalPages()}} </p> -->
+        <div class="mt-3">
+          <div class="flex justify-center space-x-2 mt-2">
+            <!-- text-white bg-gray-800 hover:bg-gray-900 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 -->
+            <button class="px-3 py-1 text-white bg-gray-700 hover:bg-gray-900 text-sm rounded-md"
+            [ngClass]="{ 'opacity-50': currentPage === page }"
 
-      <button class="px-4 py-2 bg-blue-500 text-white rounded-md" 
-      (click)="goToNextPage()" 
-      [disabled]="currentPage === getTotalPages()">Next</button>
-
-    </ng-container>
+    
+              *ngFor="let page of getPageNumbers()"
+              (click)="goToPage(page)">
+              {{ page }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
   </div>
   <ng-template #nodata>
     <div class="flex items-center justify-center h-full p-4 sm:ml-64" style="margin-top: -80px;">
