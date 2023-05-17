@@ -12,10 +12,17 @@ import { searchResultComponent } from './components/search-result/search-result.
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CachingInterceptor } from './core/services/caching-interceptor.service';
-
+import { AppLayoutComponent } from './app-layout/app-layout.component';
 
 @NgModule({
-  declarations: [AppComponent, TrendingSubjectsComponent, HomeComponent, searchResultComponent, NavbarComponent],
+  declarations: [
+    AppComponent,
+    TrendingSubjectsComponent,
+    HomeComponent,
+    searchResultComponent,
+    NavbarComponent,
+    AppLayoutComponent,
+  ],
   imports: [
     BrowserModule,
     RouterModule,
@@ -25,7 +32,9 @@ import { CachingInterceptor } from './core/services/caching-interceptor.service'
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

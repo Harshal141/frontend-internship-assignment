@@ -25,8 +25,11 @@ export class NavbarComponent {
   onSubmit() {
     // Handle the form submission logic
     console.log(this.formData.name); // Example: Log the form data to the console
-    // redirect to the search results page
     this.router.navigate(['/search-result/' + this.formData.name]);
+    // redirect to the search results page
+    this.formData = {
+      name: '',
+    };
   }
 
 
