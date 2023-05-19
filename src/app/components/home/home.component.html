@@ -1,37 +1,105 @@
-<!-- <div class="header">
-  <div class="tw-text-24-px tw-font-600">Open Books Library</div>
-
-  <form class="flex items-center" (ngSubmit)="onSubmit()">
-    <input type="text" id="name" name="name" [(ngModel)]="formData.name" class="tw-p-2 tw-border tw-border-gray-300 tw-rounded-md tw-focus:outline-none tw-focus:ring-2 tw-focus:ring-blue-500">
-    
-    
-    <button type="submit" class="tw-ml-2 tw-px-4 tw-py-2 tw-text-white tw-bg-blue-500 tw-rounded-md tw-hover:bg-blue-600 tw-focus:outline-none tw-focus:bg-blue-600 tw-border-gray-100">Search</button>
-  </form>
+<!-- // navbar -->
   
+<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+  <div class="px-3 py-3 lg:px-5 lg:pl-3">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center justify-start">
+        <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+            <span class="sr-only">Open sidebar</span>
+            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+               <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+            </svg>
+         </button>
+        <a href="https://openlibrary.org/" class="flex ml-2 md:mr-24" target="_blank">
+          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Open Library API</span>
+        </a>
+      </div>
+      <div class="flex items-center">
+        
+        <!-- <form (ngSubmit)="onSubmit()">   
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none" style="z-index: 100;">
+              <svg (click)="clearChat()" aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>                
+            </div>
+            <div>
+            <input type="search" id="name" name="name" [(ngModel)]="formData.name" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Books" required>
+            <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Go</button>
+            </div>
+          </div>
+        </form> -->
+        <div class="relative">
+          <form (ngSubmit)="onSubmit()">
+          <input type="search" id="name" name="name" [(ngModel)]="formData.name" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Books" required>
+          <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Go</button>
+
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3" style="z-index: 100;">
+            <svg (click)="clearChat()" aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400 pointer-events-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>                
+          </div>
+          </form>
+        </div>
+        
+        
+
+        <!-- <form class="flex" (ngSubmit)="onSubmit()">
+          <input placeholder="Search Books" type="text" id="name" name="name" [(ngModel)]="formData.name" class="px-2 py-1 rounded-l-md focus:outline-none">
+          <button type="submit" class="bg-white text-blue-500 px-4 py-1 rounded-r-md hover:bg-gray-100">Go</button>
+        </form> -->
+      </div>
+    </div>
+  </div>
+</nav>
+
+<aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
+   <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+      <ul class="space-y-2 font-medium">
+         <li>
+            <a (click)="navigateToHome()" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+               <svg aria-hidden="true" class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
+               <span class="ml-3">Dashboard</span>
+            </a>
+         </li>
+        <p class="ml-2 text-gray-500">
+          Trending ...
+        </p>
+        <!-- <li class="bg-white shadow-md rounded p-4"   >
+          <h3 class="text-lg font-bold">{{ subject.name }}</h3>
+          <p routerLink="/trending-subject/{{ subject.name }}" style="color:blue;cursor: pointer;">Search</p>
+        </li> -->
+         <li *ngFor="let subject of trendingSubjects" >
+            <a routerLink="/trending-subject/{{ subject.name }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+               <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+               <span class="flex-1 ml-3 whitespace-nowrap">{{ subject.name }}</span>
+            </a>
+         </li>
+
+         <!-- <li>
+            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+               <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path><path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path></svg>
+               <span class="flex-1 ml-3 whitespace-nowrap">Inbox</span>
+               <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
+            </a>
+         </li> -->
+         <li>
+            <a href="https://harshal141.github.io/Portfolio-2.0/" target="_blank" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+               <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+               <span class="flex-1 ml-3 whitespace-nowrap">Developer</span>
+               <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">&lt;/&gt;</span>
+
+            </a>
+         </li>
+      </ul>
+   </div>
+</aside>
 
 
-</div>
-<div class="tw-flex tw-flex-row tw-m-24-px">
-  <section class="trending-subjects">
-    <div class="tw-font-600 tw-text-24-px">Trending Subjects</div>
-    <ul class="tw-list-none tw-pl-0">
-      <li class="tw-text-16-px tw-cursor-pointer tw-p-12-px" *ngFor="let subject of trendingSubjects" routerLink="/trending-subject/{{ subject.name }}">
-        {{ subject.name }}
-      </li>
-    </ul>
-  </section>
-</div> -->
-<div style="overflow: hidden;">
-<!-- <front-end-internship-assignment-navbar/> -->
+<!-- // home page seach hero section -->
+<div style="overflow: hidden;" *ngIf="showHome">
 
   <div class="p-4 sm:ml-64 mt-20 ">
-    <!-- <h2 class="text-2xl font-bold mb-4">Trending Subjects</h2>
-    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <li class="bg-white shadow-md rounded p-4"  *ngFor="let subject of trendingSubjects"  >
-        <h3 class="text-lg font-bold">{{ subject.name }}</h3>
-        <p routerLink="/trending-subject/{{ subject.name }}" style="color:blue;cursor: pointer;">Search</p>
-      </li>
-    </ul> -->
     <div class="text-center bg-gray-50 text-gray-800 py-24 px-6">
       <h1 class="text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight mb-15">Surf Through 3M+ Books <br ><span class="text-4xl md:text-5xl xl:text-6xl font-bold tracking-tight mb-1 text-blue-600">Search Now</span></h1>
     </div> 
@@ -46,13 +114,77 @@
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         <span class="sr-only">Search</span>
       </button>
-
-      <!-- <form class="flex" (ngSubmit)="onSubmit()">
-          <input placeholder="Search Books" type="text" id="name" name="name" [(ngModel)]="formData.name" class="px-2 py-1 rounded-l-md focus:outline-none">
-          <button type="submit" class="bg-white text-blue-500 px-4 py-1 rounded-r-md hover:bg-gray-100">Go</button>
-        </form> -->
     </form>
   </div>
-  
 </div>
+
+<!-- // search result showcase -->
+<!-- <div *ngif="showResult"> -->
+<div *ngIf="isLoading && showResult; else content" >
+  <div class="flex items-center justify-center h-screen">
+    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+  </div>  
+</div>
+
+<ng-template #content>
+  <!-- <front-end-internship-assignment-navbar/> -->
+  <div class="p-4 sm:ml-64 mt-20" *ngIf="allResults.length > 0 && showResult; else nodata" >
+    <div class="tw-mb-24-px tw-text-24-px"> Book{{ allResults.length > 1 ? "s" : "" }} based on search "{{ subjectName }}"</div>
+  
+    <ng-container>
+      <table class="table-view">
+        <thead>
+          <tr class="table-row">
+            <th class="header">Title and Sub Title</th>
+            <th class="header">Author</th>
+            <th class="header">First Publish Year</th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          <tr *ngFor="let book of getPaginatedResults()" class="row-data">
+            <td>
+              <a class="tw-no-underline" href="https://openlibrary.org{{ book.key }}" target="_blank">{{ book.title }}</a>
+            </td>
+            <td>
+              {{ book.author_name ? book.author_name.join(", ") : "N/A" }}
+            </td>
+            <td>{{ book.first_publish_year ? book.first_publish_year : "N/A" }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <br>
+      <button class="px-4 py-2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 mr-2 mb-4"
+      [ngClass]="{ 'opacity-50 cursor-not-allowed': currentPage === 1, 'bg-gray-500': currentPage === 1 }"
+      (click)="goToPreviousPage()">
+        Previous
+      </button>
+      
+      <button class="px-4 py-2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+      [ngClass]="{ 'opacity-50 cursor-not-allowed': currentPage === getTotalPages(), 'bg-gray-500': currentPage === getTotalPages() }"
+        (click)="goToNextPage()">
+        Next
+      </button>
+        <div class="mt-3">
+          <div class="flex justify-center space-x-2 mt-2">
+            <button class="px-3 py-1 text-white bg-gray-700 hover:bg-gray-900 text-sm rounded-md"
+            [ngClass]="{ 'opacity-50': currentPage === page }"
+              *ngFor="let page of getPageNumbers()"
+              (click)="goToPage(page)">
+              {{ page }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
+  </div>
+  <ng-template #nodata>
+    <div *ngIf="showResult" class="flex items-center justify-center h-full p-4 sm:ml-64" style="margin-top: -80px;">
+      <div class="text-center">
+        <h2 class="text-2xl font-bold mb-4">No Data Found</h2>
+        <p class="text-gray-500">Sorry, no data was found. Visit <a style="color: blue;" (click)="navigateToHome()">Home</a> </p>
+      </div>
+    </div>
+  </ng-template>
+</ng-template>
+<!-- </div> -->
 

@@ -22,10 +22,19 @@ export class NavbarComponent {
     { name: 'Crypto' },
   ];
 
+  navigateToHome(){
+    this.clearChat();
+  }
+  clearChat(){
+    this.formData = {
+      name: '',
+    };
+  }
+
   onSubmit() {
     // Handle the form submission logic
     console.log(this.formData.name); // Example: Log the form data to the console
-    this.router.navigate(['/search-result/' + this.formData.name]);
+    this.router.navigate(['/' + this.formData.name]);
     // redirect to the search results page
     this.formData = {
       name: '',

@@ -15,6 +15,13 @@ export class TrendingSubjectsComponent implements OnInit {
   subjectName = '';
 
   allBooks: Book[] = [];
+  trendingSubjects: Array<any> = [
+    { name: 'JavaScript' },
+    { name: 'CSS' },
+    { name: 'HTML' },
+    { name: 'Harry Potter' },
+    { name: 'Crypto' },
+  ];
 
   constructor(
     private route: ActivatedRoute,

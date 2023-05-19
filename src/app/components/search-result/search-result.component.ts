@@ -12,7 +12,22 @@ import { Observable } from 'rxjs';
   styleUrls: ['./search-result.component.scss'],
 })
 // export class TrendingSubjectsComponent implements OnInit {
-export class searchResultComponent implements OnInit {
+export class searchResultComponent {
+  showHome = true;
+  showResult = false;
+
+  trendingSubjects: Array<any> = [
+    { name: 'JavaScript' },
+    { name: 'CSS' },
+    { name: 'HTML' },
+    { name: 'Harry Potter' },
+    { name: 'Crypto' },
+  ];
+
+  formData = {
+    name: '',
+    // Add more properties for other form controls
+  };
 
   isLoading = false;
   subjectName = '';
@@ -20,6 +35,18 @@ export class searchResultComponent implements OnInit {
   allResults: any[] = [];
   resultsPerPage = 10;
   currentPage = 1;
+
+  onSubmit() {
+    // Handle the form submission logic
+    console.log(this.formData.name); // Example: Log the form data to the console
+    // redirect to the search results page
+    // this.router.navigate(['/search-result/' + this.formData.name]);
+    this.subjectName = this.formData.name;
+    this.isLoading = true;
+    this.getData(this.subjectName);
+    this.showHome = false;
+    this.showResult = true;
+  }
 
   getTotalPages(): number {
     return Math.ceil(this.allResults.length / this.resultsPerPage);
@@ -66,48 +93,12 @@ export class searchResultComponent implements OnInit {
   //     this.isLoading = false;
   //   });
   // }
-  getData(): Observable<any> {
-    this.SearchService.getSearchBooks(this.subjectName).subscribe((response: any) => {
+  getData(value: string): Observable<any> {
+    this.SearchService.getSearchBooks(value).subscribe((response: any) => {
       this.allResults = response.docs;
-      // this.subjectsArray = data;
-      // console.log(this.books[0])
       this.isLoading = false;
     });
     return new Observable<any>();// Your data fetching logic here
   }
-  ngOnInit(): void {
-    this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => {
-        // React to changes in the parameter value
-        this.subjectName = params.get('name') || '';
-        this.isLoading = true;
-        // Perform any necessary logic based on the parameter value
-        // Load data, make API calls, etc.
-        return this.getData(); // Observable or Promise for data fetching if needed
-      })
-    ).subscribe();
-
-    // this.route.paramMap.subscribe((params: ParamMap) => {
-    //   this.subjectName = params.get('name') || '';
-    //   this.isLoading = true;
-    //   // this.getAllBooks();
-    // });
-    // const apiUrl = `http://openlibrary.org/search.json?q=${encodeURIComponent(this.subjectName)}&limit=10`;
-    
-
-    // this.http.get(apiUrl).subscribe((response: any) => {
-    //   this.books = response.docs;
-    //   // this.subjectsArray = data;
-    //   // console.log(this.books[0])
-    //   this.isLoading = false;
-    // });
-
-    this.SearchService.getSearchBooks(this.subjectName).subscribe((response: any) => {
-      this.allResults = response.docs;
-      // this.subjectsArray = data;
-      // console.log(this.books[0])
-      this.isLoading = false;
-    });
-  }
-
+  
 }
