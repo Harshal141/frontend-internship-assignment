@@ -16,6 +16,8 @@ import { OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   showHome = true;
   showResult = false;
+  isLoading = false;
+  subjectName = '';
 
   trendingSubjects: Array<any> = [
     { name: 'JavaScript' },
@@ -27,12 +29,8 @@ export class HomeComponent implements OnInit {
 
   formData = {
     name: '',
-    // Add more properties for other form controls
   };
 
-  isLoading = false;
-  subjectName = '';
-  
   allResults: any[] = [];
   resultsPerPage = 10;
   currentPage = 1;
@@ -106,6 +104,7 @@ export class HomeComponent implements OnInit {
       name: '',
     };
   }
+  
   ngOnInit() {
     this.navigateToHome();
   }

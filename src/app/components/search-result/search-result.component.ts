@@ -44,6 +44,7 @@ export class searchResultComponent {
     this.subjectName = this.formData.name;
     this.isLoading = true;
     this.getData(this.subjectName);
+    this.isLoading = false;
     this.showHome = false;
     this.showResult = true;
   }
