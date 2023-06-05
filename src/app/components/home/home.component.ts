@@ -19,6 +19,9 @@ export class HomeComponent implements OnInit {
   isLoading = false;
   subjectName = '';
 
+  totalPages = 0;
+
+
   trendingSubjects: Array<any> = [
     { name: 'JavaScript' },
     { name: 'CSS' },
@@ -35,6 +38,13 @@ export class HomeComponent implements OnInit {
   resultsPerPage = 10;
   currentPage = 1;
 
+  goToPage(n: number): void {
+    this.currentPage = n;
+    this.isLoading = true;
+    this.getData(this.subjectName, this.currentPage);
+    // this.isLoading = false;
+  }
+
   onSubmit() {
     // Handle the form submission logic
     console.log(this.formData.name); // Example: Log the form data to the console
@@ -42,41 +52,41 @@ export class HomeComponent implements OnInit {
     // this.router.navigate(['/search-result/' + this.formData.name]);
     this.subjectName = this.formData.name;
     this.isLoading = true;
-    this.getData(this.subjectName);
+    this.getData(this.subjectName, this.currentPage);
     this.showHome = false;
     this.showResult = true;
   }
 
-  getTotalPages(): number {
-    return Math.ceil(this.allResults.length / this.resultsPerPage);
-  }
+  // getTotalPages(): number {
+  //   return Math.ceil(this.allResults.length / this.resultsPerPage);
+  // }
 
-  getPaginatedResults(): any[] {
-    const startIndex = (this.currentPage - 1) * this.resultsPerPage;
-    const endIndex = startIndex + this.resultsPerPage;
-    return this.allResults.slice(startIndex, endIndex);
-  }
+  // getPaginatedResults(): any[] {
+  //   const startIndex = (this.currentPage - 1) * this.resultsPerPage;
+  //   const endIndex = startIndex + this.resultsPerPage;
+  //   return this.allResults.slice(startIndex, endIndex);
+  // }
 
-  goToPreviousPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-    }
-  }
+  // goToPreviousPage(): void {
+  //   if (this.currentPage > 1) {
+  //     this.currentPage--;
+  //   }
+  // }
 
-  goToNextPage(): void {
-    const maxPage = Math.ceil(this.allResults.length / this.resultsPerPage);
-    if (this.currentPage < maxPage) {
-      this.currentPage++;
-    }
-  }
-  getPageNumbers(): number[] {
-    const totalPages = this.getTotalPages();
-    return Array(totalPages).fill(0).map((_, index) => index + 1);
-  }
+  // goToNextPage(): void {
+  //   const maxPage = Math.ceil(this.allResults.length / this.resultsPerPage);
+  //   if (this.currentPage < maxPage) {
+  //     this.currentPage++;
+  //   }
+  // }
+  // getPageNumbers(): number[] {
+  //   const totalPages = this.getTotalPages();
+  //   return Array(totalPages).fill(0).map((_, index) => index + 1);
+  // }
   
-  goToPage(page: number) {
-    this.currentPage = page;
-  }
+  // goToPage(page: number) {
+  //   this.currentPage = page;
+  // }
   
 
   constructor(
@@ -86,9 +96,13 @@ export class HomeComponent implements OnInit {
     private http: HttpClient
   ) {}
 
-  getData(value: string): Observable<any> {
-    this.SearchService.getSearchBooks(value).subscribe((response: any) => {
+  getData(value: string,currentPage: number): Observable<any> {
+    this.SearchService.getSearchBooks(value,currentPage).subscribe((response: any) => {
       this.allResults = response.docs;
+      // get whole number using Math.ceil
+
+      this.totalPages = Math.ceil(response.numFound/10);
+      console.log(response);
       this.isLoading = false;
     });
     return new Observable<any>();// Your data fetching logic here

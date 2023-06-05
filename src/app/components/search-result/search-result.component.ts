@@ -95,10 +95,10 @@ export class searchResultComponent {
   //   });
   // }
   getData(value: string): Observable<any> {
-    this.SearchService.getSearchBooks(value).subscribe((response: any) => {
-      this.allResults = response.docs;
-      this.isLoading = false;
-    });
+    // this.SearchService.getSearchBooks(value).subscribe((response: any) => {
+    //   this.allResults = response.docs;
+    //   this.isLoading = false;
+    // });
     return new Observable<any>();// Your data fetching logic here
   }
   
