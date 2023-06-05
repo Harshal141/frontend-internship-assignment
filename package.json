@@ -6,7 +6,7 @@
     "start": "nx serve",
     "build": "nx build --prod",
     "test": "nx test",
-    "dev": "nx generate component AppLayout"
+    "newComp": "nx generate component AppLayout"
   },
   "private": true,
   "dependencies": {
