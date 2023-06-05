@@ -20,28 +20,25 @@ export class HomeComponent implements OnInit {
   subjectName = '';
 
   totalPages = 0;
-
-
-  trendingSubjects: Array<any> = [
-    { name: 'JavaScript' },
-    { name: 'CSS' },
-    { name: 'HTML' },
-    { name: 'Harry Potter' },
-    { name: 'Crypto' },
-  ];
+  limit = 10;
 
   formData = {
     name: '',
   };
 
   allResults: any[] = [];
-  resultsPerPage = 10;
   currentPage = 1;
 
+  onSelectionChange(entry: any) {
+    console.log(entry.value);
+    this.limit = entry.value;
+    this.isLoading = true;
+    this.goToPage(1);
+  }
   goToPage(n: number): void {
     this.currentPage = n;
     this.isLoading = true;
-    this.getData(this.subjectName, this.currentPage);
+    this.getData(this.subjectName, this.currentPage,this.limit);
     // this.isLoading = false;
   }
 
@@ -52,56 +49,22 @@ export class HomeComponent implements OnInit {
     // this.router.navigate(['/search-result/' + this.formData.name]);
     this.subjectName = this.formData.name;
     this.isLoading = true;
-    this.getData(this.subjectName, this.currentPage);
+    this.getData(this.subjectName, this.currentPage, this.limit);
     this.showHome = false;
     this.showResult = true;
   }
-
-  // getTotalPages(): number {
-  //   return Math.ceil(this.allResults.length / this.resultsPerPage);
-  // }
-
-  // getPaginatedResults(): any[] {
-  //   const startIndex = (this.currentPage - 1) * this.resultsPerPage;
-  //   const endIndex = startIndex + this.resultsPerPage;
-  //   return this.allResults.slice(startIndex, endIndex);
-  // }
-
-  // goToPreviousPage(): void {
-  //   if (this.currentPage > 1) {
-  //     this.currentPage--;
-  //   }
-  // }
-
-  // goToNextPage(): void {
-  //   const maxPage = Math.ceil(this.allResults.length / this.resultsPerPage);
-  //   if (this.currentPage < maxPage) {
-  //     this.currentPage++;
-  //   }
-  // }
-  // getPageNumbers(): number[] {
-  //   const totalPages = this.getTotalPages();
-  //   return Array(totalPages).fill(0).map((_, index) => index + 1);
-  // }
-  
-  // goToPage(page: number) {
-  //   this.currentPage = page;
-  // }
   
 
   constructor(
-    private route: ActivatedRoute,
-    private router : Router,
-    private SearchService: SearchService,
-    private http: HttpClient
+    private SearchService: SearchService
   ) {}
 
-  getData(value: string,currentPage: number): Observable<any> {
-    this.SearchService.getSearchBooks(value,currentPage).subscribe((response: any) => {
+  getData(value: string,currentPage: number,limit: number): Observable<any> {
+    this.SearchService.getSearchBooks(value,currentPage,limit).subscribe((response: any) => {
       this.allResults = response.docs;
       // get whole number using Math.ceil
 
-      this.totalPages = Math.ceil(response.numFound/10);
+      this.totalPages = Math.ceil(response.numFound/limit);
       console.log(response);
       this.isLoading = false;
     });

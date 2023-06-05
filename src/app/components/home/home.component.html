@@ -1,5 +1,4 @@
-<!-- // navbar -->
-  
+<!-- // navbar top search panel -->
 <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
   <div class="px-3 py-3 lg:px-5 lg:pl-3">
     <div class="flex items-center justify-between">
@@ -15,20 +14,6 @@
         </a>
       </div>
       <div class="flex items-center">
-        
-        <!-- <form (ngSubmit)="onSubmit()">   
-          <div class="relative">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none" style="z-index: 100;">
-              <svg (click)="clearChat()" aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>                
-            </div>
-            <div>
-            <input type="search" id="name" name="name" [(ngModel)]="formData.name" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Books" required>
-            <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Go</button>
-            </div>
-          </div>
-        </form> -->
         <div class="relative">
           <form (ngSubmit)="onSubmit()">
           <input type="search" id="name" name="name" [(ngModel)]="formData.name" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Books" required>
@@ -41,13 +26,6 @@
           </div>
           </form>
         </div>
-        
-        
-
-        <!-- <form class="flex" (ngSubmit)="onSubmit()">
-          <input placeholder="Search Books" type="text" id="name" name="name" [(ngModel)]="formData.name" class="px-2 py-1 rounded-l-md focus:outline-none">
-          <button type="submit" class="bg-white text-blue-500 px-4 py-1 rounded-r-md hover:bg-gray-100">Go</button>
-        </form> -->
       </div>
     </div>
   </div>
@@ -85,62 +63,79 @@
 </div>
 
 <ng-template #content>
-  <!-- <front-end-internship-assignment-navbar/> -->
   <div class="p-4 sm:ml-64 mt-20" *ngIf="allResults.length > 0 && showResult; else nodata" >
     <div class="tw-mb-24-px tw-text-24-px"> Book{{ allResults.length > 1 ? "s" : "" }} based on search "{{ subjectName }}"</div>
   
     <ng-container>
-      <front-end-internship-assignment-table-view
+      <!-- // data table -->
+    <front-end-internship-assignment-table-view
       [booksList]="allResults"
       [subjectName]="subjectName"
-      [search] = "true"
-      ></front-end-internship-assignment-table-view>
-      <br>
+      [search] = "true">
+    </front-end-internship-assignment-table-view>
+    <br>
+    
 
-        <div class="pagination" style="display: flex;">
-          <button class="pagination-btn" 
-            (click)="goToPage(1)"
-            [disabled]="currentPage === 1"
-            [ngClass]="{ 'opacity-50': currentPage === 1 }" >
-            <mat-icon
-              class="tw-cursor-pointer tw-text-[20px]"
-              aria-label="First Page Icon"
-              >first_page</mat-icon>
-          </button>
-          <button
-            class="pagination-btn"
-            (click)="goToPage(currentPage - 1)"
-            [disabled]="currentPage === 1"
-            [ngClass]="{ 'opacity-50': currentPage === 1 }">
-            <mat-icon
-              class="tw-cursor-pointer tw-text-[20px]"
-              aria-label="Pervious Icon">chevron_left</mat-icon>
-          </button>
-        
-          <span class="pagination-info">
-            Page {{currentPage}} of {{ totalPages }} 
-          </span>
-        
-          <button
-            class="pagination-btn"
-            (click)="goToPage(currentPage + 1)"
-            [disabled]="currentPage === totalPages"
-            [ngClass]="{ 'opacity-50': currentPage === totalPages }">
-            <mat-icon
-              class="tw-cursor-pointer tw-text-[20px]"
-              aria-label="Next Icon">chevron_right</mat-icon>
-          </button>
-          <button
-            class="pagination-btn"
-            (click)="goToPage(totalPages)"
-            [disabled]="currentPage === totalPages"
-            [ngClass]="{ 'opacity-50': currentPage === totalPages }">
-            <mat-icon
-              class="tw-cursor-pointer tw-text-[20px]"
-              aria-label="Last Page Icon">last_page</mat-icon>
-          </button>
+      <div class="pagination" style="display: flex; align-items: center; justify-content: space-between;">
+        <div class="relative inline-block">
+          <select [(ngModel)]="limit" (change)="onSelectionChange($event.target )" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight">
+            <option>10</option>
+            <option>20</option>
+            <option>30</option>
+            <option>40</option>
+            <option>50</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M10 12l-6-6h12l-6 6z" />
+            </svg>
+          </div>
         </div>
-      </ng-container>
+      <div style="display: flex;">
+        <button class="pagination-btn" 
+          (click)="goToPage(1)"
+          [disabled]="currentPage === 1"
+          [ngClass]="{ 'opacity-50': currentPage === 1 }" >
+          <mat-icon
+            class="tw-cursor-pointer tw-text-[20px]"
+            aria-label="First Page Icon"
+            >first_page</mat-icon>
+        </button>
+        <button
+          class="pagination-btn"
+          (click)="goToPage(currentPage - 1)"
+          [disabled]="currentPage === 1"
+          [ngClass]="{ 'opacity-50': currentPage === 1 }">
+          <mat-icon
+            class="tw-cursor-pointer tw-text-[20px]"
+            aria-label="Pervious Icon">chevron_left</mat-icon>
+        </button>
+      
+        <span class="pagination-info">
+          Page {{currentPage}} of {{ totalPages }} 
+        </span>
+      
+        <button
+          class="pagination-btn"
+          (click)="goToPage(currentPage + 1)"
+          [disabled]="currentPage === totalPages"
+          [ngClass]="{ 'opacity-50': currentPage === totalPages }">
+          <mat-icon
+            class="tw-cursor-pointer tw-text-[20px]"
+            aria-label="Next Icon">chevron_right</mat-icon>
+        </button>
+        <button
+          class="pagination-btn"
+          (click)="goToPage(totalPages)"
+          [disabled]="currentPage === totalPages"
+          [ngClass]="{ 'opacity-50': currentPage === totalPages }">
+          <mat-icon
+            class="tw-cursor-pointer tw-text-[20px]"
+            aria-label="Last Page Icon">last_page</mat-icon>
+        </button>
+      </div>
+      </div>
+    </ng-container>
   </div>
   <ng-template #nodata>
     <div *ngIf="showResult" class="flex items-center justify-center h-full p-4 sm:ml-64" style="margin-top: -80px;">

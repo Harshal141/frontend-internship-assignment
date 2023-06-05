@@ -10,9 +10,8 @@ export class SearchService {
 
   constructor(private apiService: ApiService) {}
 
-  getSearchBooks(subjectName: string,page: number ): Observable<BookResponse> {
-    // const limit = 10;
+  getSearchBooks(subjectName: string,page: number, limit: number ): Observable<BookResponse> {
 
-    return this.apiService.get(`/search.json?q=${encodeURIComponent(subjectName)}&limit=10&page=${page.toString()}`);
+    return this.apiService.get(`/search.json?q=${encodeURIComponent(subjectName)}&limit=${limit.toString()}&page=${page.toString()}`);
   }
 }
