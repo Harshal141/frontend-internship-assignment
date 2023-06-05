@@ -8,8 +8,7 @@ import { HomeComponent } from '../app/components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { searchResultComponent } from './components/search-result/search-result.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CachingInterceptor } from './core/services/caching-interceptor.service';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
@@ -19,7 +18,6 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
     AppComponent,
     TrendingSubjectsComponent,
     HomeComponent,
-    searchResultComponent,
     NavbarComponent,
     AppLayoutComponent,
   ],
